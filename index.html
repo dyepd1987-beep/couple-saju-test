@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="only light">
+<meta name="robots" content="noindex,nofollow">
+<title>우리 부부 사주</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.7/lunar.js"></script>
+<style>
+/* 2026-10-28 지점장님 "한번에 받지 말고 … 하나씩 받아 나가면서 스토리를 풀어야" → 두 사람 정보 한 번에(지점장님 선택) 뒤 질문 하나 = 이야기 한 조각.
+   계산: 검증/검증보고_2026-10-28.md 6절(manseryeok.kr 기본값과 30/30 일치). 칸 규칙: landing-form-guard */
+:root{--font:Pretendard,'Malgun Gothic',sans-serif;--ink:#1F1B24;--muted:#6B6472;--line:#E7E2EA;--bg:#FAF8F6;--card:#fff;--rose:#B4436C;--rose-t:#F8E9EF;--navy:#2B3A67;--navy-t:#E8ECF6;--err:#C0392B;--mok:#3E8E5E;--hwa:#D0563B;--to:#B58A3C;--geum:#8B8F98;--su:#2F5D9E;color-scheme:only light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.7;word-break:keep-all}
+.wrap{max-width:440px;margin:0 auto;padding:0 16px 64px}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;height:48px;background:var(--bg)}
+.top a{color:var(--muted);text-decoration:none;font-size:14px}
+.steps{display:flex;gap:4px}
+.steps i{width:22px;height:4px;border-radius:2px;background:var(--line)}
+.steps i.on{background:var(--rose)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--rose)}
+h1{font-size:24px;line-height:1.35;margin:6px 0;text-wrap:balance}
+h2{font-size:18px;line-height:1.4;margin:0 0 10px;text-wrap:balance}
+.lead{color:var(--muted);font-size:14px;margin:0 0 16px}
+.meta{font-size:12px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:10px 12px;margin:4px 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}
+.card p{margin:0 0 10px}.card p:last-child{margin:0}
+.who{font-weight:700;font-size:16px;margin:0 0 4px}
+.who.w{color:var(--rose)}.who.h{color:var(--navy)}
+label.f{display:block;font-size:13px;font-weight:700;color:var(--muted);margin:12px 0 6px}
+input[type=text],input[type=tel],textarea{width:100%;padding:12px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+input:focus,textarea:focus{outline:none;border-color:var(--navy)}
+input:disabled{background:#F4F2F5}
+textarea{min-height:76px;resize:vertical;font-size:15px}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.seg label{flex:1 1 auto;min-width:64px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:block;text-align:center;padding:10px 8px;border:1.5px solid var(--line);border-radius:10px;font-size:14px;background:#fff}
+.seg input:checked+span{border-color:var(--navy);background:var(--navy-t);color:var(--navy);font-weight:700}
+.seg input:focus-visible+span{outline:2px solid var(--navy);outline-offset:2px}
+.row{display:flex;gap:10px;align-items:center}
+.row input[type=text]{flex:1}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:14px}
+.chk input{width:20px;height:20px;margin:3px 0 0;flex:none}
+.prev{font-size:13px;color:var(--navy);min-height:20px;margin-top:4px}
+.prev.bad,.msg{color:var(--err)}
+.msg{font-size:13px;margin-top:4px}
+.small{font-size:12px;color:var(--muted);margin:6px 0 0}
+button.go{display:block;width:100%;margin:4px 0 14px;padding:15px 0;border:0;border-radius:12px;background:var(--navy);color:#fff;font:inherit;font-weight:700;font-size:16px}
+button.go:disabled{opacity:.6}
+/* 이야기 조각 */
+.piece{animation:up .5s ease both}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.piece{animation:none}}
+.hero{text-align:center;padding:22px 18px}
+.hero h1{font-size:23px}
+.pair{display:flex;justify-content:center;gap:10px;margin:14px 0 8px;flex-wrap:wrap}
+.pill{border-radius:12px;padding:8px 12px;font-weight:700;font-size:15px}
+.pill small{display:block;font-size:12px;font-weight:500;color:var(--muted)}
+.pill.h{background:var(--navy-t);color:var(--navy)}.pill.w{background:var(--rose-t);color:var(--rose)}
+.rare{font-size:13px;color:var(--muted)}
+.pillars{display:grid;grid-template-columns:44px repeat(4,1fr);gap:4px;text-align:center;font-size:14px;margin-top:8px}
+.pillars .hd{font-size:12px;color:var(--muted)}
+.pillars b{background:var(--bg);border-radius:8px;padding:4px 0;font-weight:700;letter-spacing:.05em}
+.bars{display:grid;grid-template-columns:28px 1fr 1fr;gap:6px 10px;align-items:center;font-size:13px}
+.bars .hd{font-weight:700;color:var(--muted);font-size:12px}
+.bar{height:12px;border-radius:6px;background:#F0EDF1;position:relative;overflow:hidden}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;transition:width .8s ease}
+.cal{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px}
+.cal div{border:1px solid var(--line);border-radius:10px;padding:6px 0;text-align:center;font-size:13px;background:#fff;line-height:1.4}
+.cal small{display:block;font-size:12px;color:var(--muted)}
+.cal .bad{background:#FCEDE8;border-color:#F0C3B6;color:#9A3A22;font-weight:700}
+.cal .good{background:#E9F4EE;border-color:#BFDCCB;color:#2E6B47;font-weight:700}
+.legend{font-size:12px;color:var(--muted);margin-top:8px}
+.quote{background:var(--rose-t);border-radius:10px;padding:8px 12px;color:#6E3550;font-size:14px;margin:0 0 12px}
+.share{background:linear-gradient(160deg,#2B3A67,#4B3A6A);color:#fff;border-radius:18px;padding:22px 18px;text-align:center}
+.share .t{font-size:21px;font-weight:800;margin:6px 0}
+.share .s{font-size:14px;opacity:.9}
+.kakao{display:block;width:100%;margin-top:14px;padding:13px 0;border:0;border-radius:12px;background:#FEE500;color:#191919;font:inherit;font-weight:700;font-size:15px}
+.hide{display:none}
+</style></head><body><div class="wrap">
+
+<div class="top"><a href="javascript:history.back()">← 나가기</a><div class="steps" id="steps"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+<div class="meta">시안 · 사주 계산은 한국 만세력과 30명 대조 일치. 풀이 문장은 명리 검증 전이고, 서버·결제는 아직 붙이지 않았습니다.</div>
+
+<div id="story"></div>
+
+<!-- 1단계: 두 사람 -->
+<form class="q" id="q1" novalidate>
+  <div class="eyebrow">우리 부부 사주</div>
+  <h1>두 분의 태어난 날로<br>이야기를 시작할게요</h1>
+  <p class="lead">질문 하나에 이야기 한 조각씩 열립니다.</p>
+  <div class="card" data-who="w"><p class="who w">나</p>
+    <label class="f" for="w_name">이름</label><input type="text" id="w_name" maxlength="10" autocomplete="off" placeholder="예) 김지은">
+    <div class="msg" id="w_name_m"></div>
+    <label class="f" for="w_birth">생년월일 8자리</label><input type="text" id="w_birth" inputmode="numeric" maxlength="10" placeholder="예) 19901102" autocomplete="off">
+    <div class="prev" id="w_birth_p"></div>
+    <div class="seg" role="radiogroup" aria-label="나 양력 음력"><label><input type="radio" name="w_cal" value="solar" checked><span>양력</span></label><label><input type="radio" name="w_cal" value="lunar"><span>음력</span></label><label><input type="radio" name="w_cal" value="leap"><span>음력 윤달</span></label></div>
+    <label class="f" for="w_time">태어난 시각 4자리</label>
+    <div class="row"><input type="text" id="w_time" inputmode="numeric" maxlength="5" placeholder="예) 2210" autocomplete="off"><label class="chk"><input type="checkbox" id="w_tx">모름</label></div>
+    <div class="prev" id="w_time_p"></div>
+  </div>
+  <div class="card" data-who="h"><p class="who h">남편</p>
+    <label class="f" for="h_name">이름</label><input type="text" id="h_name" maxlength="10" autocomplete="off" placeholder="예) 박민수">
+    <div class="msg" id="h_name_m"></div>
+    <label class="f" for="h_birth">생년월일 8자리</label><input type="text" id="h_birth" inputmode="numeric" maxlength="10" placeholder="예) 19870314" autocomplete="off">
+    <div class="prev" id="h_birth_p"></div>
+    <div class="seg" role="radiogroup" aria-label="남편 양력 음력"><label><input type="radio" name="h_cal" value="solar" checked><span>양력</span></label><label><input type="radio" name="h_cal" value="lunar"><span>음력</span></label><label><input type="radio" name="h_cal" value="leap"><span>음력 윤달</span></label></div>
+    <label class="f" for="h_time">태어난 시각 4자리</label>
+    <div class="row"><input type="text" id="h_time" inputmode="numeric" maxlength="5" placeholder="예) 0730" autocomplete="off"><label class="chk"><input type="checkbox" id="h_tx">모름</label></div>
+    <div class="prev" id="h_time_p"></div>
+  </div>
+  <button class="go" type="submit">첫 이야기 보기</button>
+</form>
+
+<!-- 2단계 -->
+<form class="q hide" id="q2" novalidate><div class="card">
+  <h2>결혼한 지 얼마나 되셨어요?</h2>
+  <div class="seg" role="radiogroup" aria-label="결혼 연차"><label><input type="radio" name="yrs" value="0-2"><span>2년 이하</span></label><label><input type="radio" name="yrs" value="3-6"><span>3~6년</span></label><label><input type="radio" name="yrs" value="7-14"><span>7~14년</span></label><label><input type="radio" name="yrs" value="15+"><span>15년 이상</span></label></div>
+  <div class="msg" id="yrs_m"></div>
+  <label class="f">아이는요?</label>
+  <div class="seg" role="radiogroup" aria-label="아이"><label><input type="radio" name="kids" value="0"><span>없음</span></label><label><input type="radio" name="kids" value="1"><span>1명</span></label><label><input type="radio" name="kids" value="2+"><span>2명 이상</span></label><label><input type="radio" name="kids" value="wait"><span>준비 중</span></label></div>
+  <div class="msg" id="kids_m"></div>
+</div><button class="go" type="submit">다음 이야기</button></form>
+
+<!-- 3단계 -->
+<form class="q hide" id="q3" novalidate><div class="card">
+  <h2>요즘 두 분 사이에서 가장 자주 걸리는 건 뭐예요?</h2>
+  <div class="seg" role="radiogroup" aria-label="고민"><label><input type="radio" name="worry" value="money"><span>돈</span></label><label><input type="radio" name="worry" value="talk"><span>대화</span></label><label><input type="radio" name="worry" value="kids"><span>육아</span></label><label><input type="radio" name="worry" value="family"><span>양가</span></label><label><input type="radio" name="worry" value="work"><span>일·이직</span></label><label><input type="radio" name="worry" value="none"><span>딱히 없음</span></label></div>
+  <div class="msg" id="worry_m"></div>
+</div><button class="go" type="submit">다음 이야기</button></form>
+
+<!-- 4단계 -->
+<form class="q hide" id="q4" novalidate><div class="card">
+  <h2>최근에 서운했던 장면이 있었나요?</h2>
+  <textarea id="scene" maxlength="300" placeholder="예) 주말 계획을 혼자 정해서 통보했을 때 (안 적어도 돼요)"></textarea>
+  <label class="f">다투고 나면 보통</label>
+  <div class="seg" role="radiogroup" aria-label="화해 방식"><label><input type="radio" name="makeup" value="talk"><span>바로 대화</span></label><label><input type="radio" name="makeup" value="time"><span>시간이 지나면</span></label><label><input type="radio" name="makeup" value="act"><span>말 없이 행동으로</span></label></div>
+  <div class="msg" id="makeup_m"></div>
+</div><button class="go" type="submit">다음 이야기</button></form>
+
+<!-- 5단계 -->
+<form class="q hide" id="q5" novalidate><div class="card">
+  <h2>전체 결과지를 받을 번호를 알려 주세요</h2>
+  <p class="small" style="margin:0 0 8px">지금까지 본 이야기에 내년 달력·대화법·두 분만의 약속까지 더한 결과지 주소를 문자로 보내 드립니다.</p>
+  <label class="f" for="phone">휴대폰 번호</label>
+  <input type="tel" id="phone" name="phone" inputmode="numeric" autocomplete="tel" maxlength="13" value="010-">
+  <div class="msg" id="phone_m"></div>
+  <label class="chk" style="margin-top:12px"><input type="checkbox" id="agree"><span>두 분의 생년월일·시각과 적어 주신 이야기를 결과지를 만드는 데만 쓰는 것에 동의합니다.</span></label>
+  <div class="msg" id="agree_m"></div>
+</div><button class="go" id="go5" type="submit">결과지 받기</button></form>
+
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+const PHONE_RE = /^010\d{8}$/;
+const digits = (s) => s.replace(/\D/g, '');
+const pick = (n) => (document.querySelector(`[name=${n}]:checked`) || {}).value;
+// 받침 따라 조사: jo('보석','와','과') → '보석과'
+const jo = (w, a, b) => { const c = w.charCodeAt(w.length - 1) - 0xAC00; return w + (c >= 0 && c <= 11171 && c % 28 ? b : a); };
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/* ── 입력 검사 ── */
+function parseBirth(s) {
+  const d = digits(s); let y, m, dd;
+  if (d.length === 8) { y = +d.slice(0, 4); m = +d.slice(4, 6); dd = +d.slice(6); }
+  else if (d.length === 6) { const yy = +d.slice(0, 2); y = yy <= 12 ? 2000 + yy : 1900 + yy; m = +d.slice(2, 4); dd = +d.slice(4); }
+  else return null;
+  if (y < 1930 || y > 2012) return null;
+  const t = new Date(y, m - 1, dd);
+  return t.getFullYear() === y && t.getMonth() === m - 1 && t.getDate() === dd ? { y, m, d: dd } : null;
+}
+function parseTime(s) {
+  const d = digits(s); if (d.length < 3 || d.length > 4) return null;
+  const h = +d.slice(0, d.length - 2), mi = +d.slice(-2);
+  return h <= 23 && mi <= 59 ? { h, mi } : null;
+}
+const CAL = { solar: '양력', lunar: '음력', leap: '음력 윤달' };
+function showBirth(w) {
+  const v = $(w + '_birth').value, p = $(w + '_birth_p'), b = parseBirth(v);
+  if (!digits(v)) { p.textContent = ''; p.classList.remove('bad'); return null; }
+  p.classList.toggle('bad', !b);
+  p.textContent = b ? `→ ${b.y}년 ${b.m}월 ${b.d}일 (${CAL[pick(w + '_cal')]})` : '다시 확인해 주세요 (예: 19870314)';
+  return b;
+}
+function showTime(w) {
+  const tx = $(w + '_tx').checked, inp = $(w + '_time'), p = $(w + '_time_p');
+  inp.disabled = tx;
+  if (tx) { p.classList.remove('bad'); p.textContent = '시각 없이 세 기둥으로 풉니다'; return 'unknown'; }
+  const v = inp.value, t = parseTime(v);
+  if (!digits(v)) { p.textContent = ''; p.classList.remove('bad'); return null; }
+  p.classList.toggle('bad', !t);
+  p.textContent = t ? `→ ${t.h < 12 ? '오전' : '오후'} ${t.h % 12 || 12}시 ${t.mi}분` : '다시 확인해 주세요 (예: 0730)';
+  return t;
+}
+['h', 'w'].forEach((w) => {
+  $(w + '_birth').addEventListener('input', () => showBirth(w));
+  document.querySelectorAll(`[name=${w}_cal]`).forEach((r) => r.addEventListener('change', () => showBirth(w)));
+  $(w + '_time').addEventListener('input', () => showTime(w));
+  $(w + '_tx').addEventListener('change', () => showTime(w));
+});
+const phone = $('phone');
+// 눌러도 커서는 맨 뒤로 — 미리 채운 010- 앞에 숫자가 끼지 않게
+phone.addEventListener('focus', () => setTimeout(() => phone.setSelectionRange(phone.value.length, phone.value.length)));
+phone.addEventListener('input', () => {
+  let d = digits(phone.value); if (d.startsWith('010010')) d = d.slice(3); // 미리 채운 010- 뒤에 010부터 다시 친 경우
+  d = d.slice(0, 11);
+  phone.value = d.length > 7 ? `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}` : d.length > 3 ? `${d.slice(0, 3)}-${d.slice(3)}` : d;
+  if (PHONE_RE.test(d)) $('phone_m').textContent = '';
+});
+function fail(el, msgId, text) { if (msgId) $(msgId).textContent = text; el.focus(); el.scrollIntoView({ block: 'center' }); return false; }
+const clearMsgs = (f) => f.querySelectorAll('.msg').forEach((m) => (m.textContent = ''));
+
+/* ── 사주 계산 (검증보고 6절 그대로: 절기=베이징시, 일·시=진태양시, 통자시) ── */
+const fmtOff = new Intl.DateTimeFormat('en', { timeZone: 'Asia/Seoul', timeZoneName: 'longOffset' });
+const off = (ms) => { const m = fmtOff.format(new Date(ms)).match(/GMT([+-])(\d\d):(\d\d)/); return m ? (m[1] === '-' ? -1 : 1) * (m[2] * 60 + +m[3]) : 540; };
+function seoulToUtc(y, m, d, h, mi) { const n = Date.UTC(y, m - 1, d, h, mi); let u = n - 9 * 36e5; for (let i = 0; i < 3; i++) u = n - off(u) * 6e4; return u; }
+const wall = (ms) => { const t = new Date(ms); return [t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate(), t.getUTCHours(), t.getUTCMinutes()]; };
+function eightChar(y, m, d, h, mi, lon = 126.98) {
+  const known = h != null;
+  const utc = seoulToUtc(y, m, d, known ? h : 12, known ? mi : 0);
+  const ym = Solar.fromYmdHms(...wall(utc + 8 * 36e5), 0).getLunar().getEightChar();
+  const dh = Solar.fromYmdHms(...wall(utc + (lon / 15) * 36e5), 0).getLunar().getEightChar();
+  dh.setSect(1);
+  return [ym.getYear(), ym.getMonth(), dh.getDay(), known ? dh.getTime() : null];
+}
+function toSolar(b, cal) {
+  if (cal === 'solar') return b;
+  const s = Lunar.fromYmd(b.y, cal === 'leap' ? -b.m : b.m, b.d).getSolar();
+  return { y: s.getYear(), m: s.getMonth(), d: s.getDay() };
+}
+
+/* ── 풀이 재료 (명리 검증 전 초안) ── */
+const EL = { 甲:'목',乙:'목',丙:'화',丁:'화',戊:'토',己:'토',庚:'금',辛:'금',壬:'수',癸:'수',寅:'목',卯:'목',巳:'화',午:'화',辰:'토',戌:'토',丑:'토',未:'토',申:'금',酉:'금',亥:'수',子:'수' };
+const ELS = ['목', '화', '토', '금', '수'], ELC = { 목:'--mok', 화:'--hwa', 토:'--to', 금:'--geum', 수:'--su' };
+const GEN = { 목:'화', 화:'토', 토:'금', 금:'수', 수:'목' }, CTRL = { 목:'토', 토:'수', 수:'화', 화:'금', 금:'목' };
+const STEM = {
+  甲:['큰 나무','곧게 뻗는 사람','한번 정하면 끝까지 밀고 가는 힘'], 乙:['덩굴꽃','유연하게 감싸는 사람','상황에 맞춰 길을 찾는 힘'],
+  丙:['한낮의 해','환하게 드러내는 사람','분위기를 단번에 바꾸는 힘'], 丁:['등불','곁을 오래 비추는 사람','한 사람을 끝까지 챙기는 힘'],
+  戊:['큰 산','묵직하게 버티는 사람','흔들릴 때 중심을 잡는 힘'], 己:['너른 밭','기르고 품는 사람','작은 것을 키워 내는 힘'],
+  庚:['단단한 바위','결단이 빠른 사람','안 되는 건 안 된다고 끊는 힘'], 辛:['반짝이는 보석','기준이 섬세한 사람','남이 못 보는 디테일을 보는 힘'],
+  壬:['넓은 바다','크게 흐르는 사람','새 판을 벌이는 힘'], 癸:['봄비','스며드는 사람','말없이 마음을 읽는 힘'],
+};
+// 일간끼리 관계: 같음 / 내가 생 / 나를 생 / 내가 극 / 나를 극
+function relation(a, b) { // a=아내 일간 오행, b=남편
+  if (a === b) return '같은 기운이라 서로를 설명 없이 압니다. 대신 둘 다 물러서지 않는 순간이 오면 오래 갑니다.';
+  if (GEN[a] === b) return '아내의 기운이 남편을 키워 주는 자리입니다. 남편이 밖에서 버틸 수 있는 힘의 상당 부분이 아내에게서 나옵니다.';
+  if (GEN[b] === a) return '남편의 기운이 아내를 키워 주는 자리입니다. 아내가 하고 싶은 일을 할 때 남편이 가장 든든한 뒷배가 됩니다.';
+  if (CTRL[a] === b) return '아내가 남편을 다듬는 자리입니다. 아내의 한마디가 남편에게는 생각보다 크게 들립니다.';
+  return '남편이 아내를 다듬는 자리입니다. 남편의 기준이 아내에게는 잔소리처럼 닿기 쉬운 구조입니다.';
+}
+const ZHI_CHONG = { 子:'午',午:'子',丑:'未',未:'丑',寅:'申',申:'寅',卯:'酉',酉:'卯',辰:'戌',戌:'辰',巳:'亥',亥:'巳' };
+const ZHI_HE = { 子:'丑',丑:'子',寅:'亥',亥:'寅',卯:'戌',戌:'卯',辰:'酉',酉:'辰',巳:'申',申:'巳',午:'未',未:'午' };
+function countEl(p) { const c = { 목:0, 화:0, 토:0, 금:0, 수:0 }; p.filter(Boolean).forEach((x) => { c[EL[x[0]]]++; c[EL[x[1]]]++; }); return c; }
+// 일간 기준 십신 무리: 비겁(같음)·식상(내가 생)·재성(내가 극)·관성(나를 극)·인성(나를 생)
+function godCount(p) {
+  const me = EL[p[2][0]], g = { 비겁:0, 식상:0, 재성:0, 관성:0, 인성:0 };
+  p.filter(Boolean).forEach((x, i) => [...x].forEach((ch, j) => {
+    if (i === 2 && j === 0) return; const e = EL[ch];
+    g[e === me ? '비겁' : GEN[me] === e ? '식상' : CTRL[me] === e ? '재성' : CTRL[e] === me ? '관성' : '인성']++;
+  }));
+  return g;
+}
+
+/* ── 이야기 조각 ── */
+let S = {};
+const story = $('story');
+function addPiece(html) {
+  const el = document.createElement('section'); el.className = 'piece'; el.innerHTML = html; story.appendChild(el);
+  el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+}
+function showStep(n) {
+  document.querySelectorAll('form.q').forEach((f) => f.classList.add('hide'));
+  if ($('q' + n)) $('q' + n).classList.remove('hide');
+  document.querySelectorAll('#steps i').forEach((i, k) => i.classList.toggle('on', k < n));
+}
+const pillarRow = (who, cls, p) => `<span class="hd">${who}</span>${p.map((x) => `<b style="color:var(${cls})">${x || '?'}</b>`).join('')}`;
+
+function piece1() {
+  const { w, h } = S, ws = STEM[w.p[2][0]], hs = STEM[h.p[2][0]];
+  const wc = countEl(w.p), hc = countEl(h.p), max = Math.max(...Object.values(wc), ...Object.values(hc), 4);
+  const bars = ELS.map((e) => `<span>${e}</span>${[wc, hc].map((c) => `<div class="bar"><i style="width:${(c[e] / max) * 100}%;background:var(${ELC[e]})"></i></div>`).join('')}`).join('');
+  const lackW = ELS.filter((e) => !wc[e]), lackH = ELS.filter((e) => !hc[e]);
+  const fill = lackW.filter((e) => hc[e]).concat(lackH.filter((e) => wc[e]));
+  const zw = w.p[2][1], zh = h.p[2][1];
+  const zhi = ZHI_CHONG[zw] === zh ? '두 분이 앉은 자리(일지)는 서로 정면으로 마주 보는 충(沖)입니다. 부딪힘이 잦은 대신, 그만큼 서로를 깨우는 조합입니다.'
+    : ZHI_HE[zw] === zh ? '두 분이 앉은 자리(일지)가 서로 끌어당기는 합(合)입니다. 다투고도 금방 같은 자리로 돌아오는 부부에게 많은 조합입니다.'
+    : zw === zh ? '두 분이 같은 자리(일지)에 앉아 있습니다. 생활 리듬이 닮아 편하지만, 같은 곳에서 동시에 지치기도 합니다.'
+    : '두 분이 앉은 자리(일지)는 크게 부딪히지도 끌어당기지도 않습니다. 관계의 온도는 두 분이 쓰는 말에 달려 있는 조합입니다.';
+  addPiece(`<div class="card hero"><div class="eyebrow">첫 번째 이야기</div>
+    <h1>${jo(esc(hs[0]), '와', '과')}<br>${esc(ws[0])}</h1>
+    <div class="pair"><div class="pill w">${w.p[2]} ${esc(w.name)}<small>${ws[1]}</small></div><div class="pill h">${h.p[2]} ${esc(h.name)}<small>${hs[1]}</small></div></div>
+    <div class="rare">태어난 날로 정해지는 조합 3,600가지 중 하나입니다.</div></div>
+    <div class="card"><div class="pillars"><span class="hd"></span><span class="hd">시</span><span class="hd">일</span><span class="hd">월</span><span class="hd">년</span>
+      ${pillarRow('나', '--rose', [w.p[3], w.p[2], w.p[1], w.p[0]])}${pillarRow('남편', '--navy', [h.p[3], h.p[2], h.p[1], h.p[0]])}</div></div>
+    <div class="card"><p>${esc(w.name)} 님은 <b>${ws[0]}</b>입니다. ${ws[2]}을 타고났습니다. ${esc(h.name)} 님은 <b>${hs[0]}</b>, ${hs[2]}을 가졌습니다.</p>
+      <p>${relation(EL[w.p[2][0]], EL[h.p[2][0]])}</p><p>${zhi}</p></div>
+    <div class="card"><h2>두 분의 기운, 나란히 놓고 보기</h2><div class="bars"><span class="hd"></span><span class="hd">나</span><span class="hd">남편</span>${bars}</div>
+      <p class="legend">${fill.length ? `한 사람에게 없는 기운(${[...new Set(fill)].join('·')})을 다른 사람이 갖고 있습니다. 서로 채워 주는 부분입니다.` : '두 분이 비어 있는 기운이 겹칩니다. 그 부분은 둘 다 약하니 바깥 도움을 빌리는 편이 낫습니다.'}</p></div>`);
+}
+function piece2() {
+  const { w, h, yrs, kids } = S, now = new Date(), cells = [];
+  let warn = [], warm = [];
+  for (let k = 1; k <= 12; k++) {
+    const t = new Date(now.getFullYear(), now.getMonth() + k, 15), mz = Solar.fromYmd(t.getFullYear(), t.getMonth() + 1, 15).getLunar().getEightChar().getMonth()[1];
+    const bad = ZHI_CHONG[w.p[2][1]] === mz || ZHI_CHONG[h.p[2][1]] === mz, good = ZHI_HE[w.p[2][1]] === mz || ZHI_HE[h.p[2][1]] === mz;
+    const lab = `${t.getMonth() + 1}월`; if (bad) warn.push(lab); else if (good) warm.push(lab);
+    cells.push(`<div class="${bad ? 'bad' : good ? 'good' : ''}">${lab}<small>${t.getFullYear() % 100}년</small></div>`);
+  }
+  const stage = { '0-2': '서로의 생활 방식을 맞춰 가는 시기', '3-6': '둘의 방식이 굳어지는 시기', '7-14': '각자 맡은 몫이 커져 대화가 줄기 쉬운 시기', '15+': '둘만의 시간을 다시 찾는 시기' }[yrs];
+  const kid = kids === '0' ? '아직 둘만의 시간이 많은 지금이' : kids === 'wait' ? '아이를 기다리는 지금이' : '아이에게 시간이 많이 가는 지금이';
+  addPiece(`<div class="card"><div class="eyebrow">두 번째 이야기</div><h2>앞으로 1년, 두 분의 달력</h2>
+    <p>결혼 ${{ '0-2': '2년 이하', '3-6': '3~6년 차', '7-14': '7~14년 차', '15+': '15년 넘은' }[yrs]}는 ${stage}입니다. ${kid} 달력을 미리 보는 게 쓸모 있는 때입니다.</p>
+    <div class="cal">${cells.join('')}</div>
+    <p class="legend">빨강: 두 분 중 한 사람이 쉽게 예민해지는 달 · 초록: 서로 가까워지기 쉬운 달</p>
+    <p>${warn.length ? `<b>${warn.join('·')}</b>에는 큰 결정(이사·돈·양가 일정)을 서두르지 않는 게 좋습니다.` : '앞으로 1년은 크게 부딪히는 달이 없습니다.'} ${warm.length ? `<b>${warm.join('·')}</b>은 미뤄 둔 이야기를 꺼내기 좋은 달입니다.` : ''}</p></div>`);
+}
+const WORRY = {
+  money: ['재성', '돈', '돈을 보는 눈'], talk: ['식상', '대화', '말로 풀어내는 힘'], kids: ['식상', '육아', '돌보고 표현하는 힘'],
+  family: ['인성', '양가', '받아들이고 기대는 힘'], work: ['관성', '일·이직', '책임을 지는 힘'],
+};
+function piece3() {
+  const { w, h, worry } = S;
+  if (worry === 'none') { addPiece(`<div class="card"><div class="eyebrow">세 번째 이야기</div><h2>지금 큰 고민이 없다는 것</h2><p>요즘 걸리는 게 없다는 건, 두 분이 이미 서로의 속도를 맞춰 놓았다는 뜻입니다. 이럴 때 해 두면 좋은 건 '나중에 꺼낼 이야기'를 미리 적어 두는 것입니다.</p></div>`); return; }
+  const [god, word, power] = WORRY[worry], gw = godCount(w.p)[god], gh = godCount(h.p)[god];
+  const lead = gw === gh ? '두 분이 비슷하게' : gw > gh ? `${esc(w.name)} 님이 더 많이` : `${esc(h.name)} 님이 더 많이`;
+  addPiece(`<div class="card"><div class="eyebrow">세 번째 이야기</div><h2>${word} 이야기가 자꾸 걸리는 이유</h2>
+    <p class="quote">사주에서 ${word}와 이어지는 건 ${power}입니다. 이 힘을 ${lead} 갖고 태어났습니다. (나 ${gw} · 남편 ${gh})</p>
+    <p>${gw === gh ? `같은 만큼 가진 두 사람은 같은 문제를 같은 방식으로 보려 합니다. 그래서 서로 양보할 이유를 못 찾을 때가 많습니다. 누가 먼저 정할지를 미리 나눠 두면 다툼이 줄어듭니다.` : `더 많이 가진 쪽은 이 일이 '당연히 보이는' 사람이고, 적게 가진 쪽은 '말해 줘야 보이는' 사람입니다. ${word} 이야기에서 다툼은 대개 '왜 이걸 몰라'와 '말을 안 했잖아' 사이에서 생깁니다.`}</p></div>`);
+}
+const MAKEUP = { talk: '바로 대화로 푸는', time: '시간을 두고 가라앉히는', act: '말 대신 행동으로 푸는' };
+const COOL = { 목:'혼자 걷는 시간', 화:'바로 털어놓을 상대', 토:'익숙한 자리에서의 휴식', 금:'정리할 시간과 조용한 공간', 수:'잠과 혼자만의 생각' };
+function piece4() {
+  const { w, h, scene, makeup } = S, ew = EL[w.p[2][0]], eh = EL[h.p[2][0]];
+  addPiece(`<div class="card"><div class="eyebrow">네 번째 이야기</div><h2>두 분만의 화해법</h2>
+    ${scene ? `<p class="quote">"${esc(scene)}"</p>` : ''}
+    <p>두 분은 ${MAKEUP[makeup]} 부부입니다. 그런데 화가 가라앉는 데 필요한 것은 두 분이 서로 다릅니다. ${esc(w.name)} 님은 <b>${COOL[ew]}</b>${jo(COOL[ew], '가', '이').slice(-1)}, ${esc(h.name)} 님은 <b>${COOL[eh]}</b>${jo(COOL[eh], '가', '이').slice(-1)} 먼저 필요한 기운입니다.</p>
+    <p>${ew === eh ? '필요한 게 같으니, 둘 다 한발 물러나는 시간을 정해 두면 됩니다.' : '그래서 한쪽이 다가갈 때 다른 쪽은 아직 준비가 안 된 경우가 많습니다. "지금 말고 몇 시에 이야기하자"처럼 시간을 정하는 말 한마디가 가장 잘 듣습니다.'}</p></div>`);
+}
+function pieceEnd() {
+  const { w, h } = S;
+  addPiece(`<div class="share"><div class="eyebrow" style="color:#fff;opacity:.8">결과지를 보내 드릴게요</div>
+    <div class="t">${jo(esc(STEM[h.p[2][0]][0]), '와', '과')} ${esc(STEM[w.p[2][0]][0])}</div>
+    <div class="s">친구에게 우리 부부 조합을 보여 주고, 친구 부부 것도 같이 볼 수 있어요.</div>
+    <button class="kakao" type="button">카카오톡으로 친구에게 보내기</button></div>`);
+}
+
+/* ── 단계 진행 ── */
+$('q1').addEventListener('submit', (e) => {
+  e.preventDefault(); clearMsgs(e.target);
+  const ppl = {};
+  for (const w of ['w', 'h']) {
+    const who = w === 'w' ? '나' : '남편', name = $(w + '_name').value.trim();
+    if (name.length < 2 || /^\d+$/.test(name)) return fail($(w + '_name'), w + '_name_m', `${who}의 이름을 적어 주세요`);
+    const b = showBirth(w);
+    if (!b) { $(w + '_birth_p').classList.add('bad'); $(w + '_birth_p').textContent = `${who}의 생년월일 8자리를 적어 주세요`; return fail($(w + '_birth')); }
+    const t = showTime(w);
+    if (!t) { $(w + '_time_p').classList.add('bad'); $(w + '_time_p').textContent = `${who}의 태어난 시각을 적거나 '모름'을 눌러 주세요`; return fail($(w + '_time')); }
+    let s; try { s = toSolar(b, pick(w + '_cal')); } catch { $(w + '_birth_p').classList.add('bad'); $(w + '_birth_p').textContent = '그해에는 그 음력 날짜가 없습니다'; return fail($(w + '_birth')); }
+    const tt = t === 'unknown' ? null : t;
+    ppl[w] = { name, birth: b, cal: pick(w + '_cal'), time: tt, p: eightChar(s.y, s.m, s.d, tt ? tt.h : null, tt ? tt.mi : 0) };
+  }
+  S = { w: ppl.w, h: ppl.h };
+  e.target.classList.add('hide'); document.querySelector('.meta').classList.add('hide');
+  piece1(); showStep(2); story.appendChild($('q2'));
+});
+function step(n, need, then) {
+  $('q' + n).addEventListener('submit', (e) => {
+    e.preventDefault(); clearMsgs(e.target);
+    for (const [k, t] of need) if (!pick(k)) return fail(document.querySelector(`[name=${k}]`), k + '_m', t);
+    then(); showStep(n + 1); if ($('q' + (n + 1))) story.appendChild($('q' + (n + 1)));
+  });
+}
+step(2, [['yrs', '결혼 연차를 골라 주세요'], ['kids', '아이 칸을 골라 주세요']], () => { S.yrs = pick('yrs'); S.kids = pick('kids'); piece2(); });
+step(3, [['worry', '하나를 골라 주세요']], () => { S.worry = pick('worry'); piece3(); });
+step(4, [['makeup', '화해 방식을 골라 주세요']], () => { S.scene = $('scene').value.trim(); S.makeup = pick('makeup'); piece4(); });
+$('q5').addEventListener('submit', (e) => {
+  e.preventDefault(); clearMsgs(e.target);
+  if (!PHONE_RE.test(digits(phone.value))) return fail(phone, 'phone_m', '휴대폰 번호 11자리를 모두 적어 주세요');
+  if (!$('agree').checked) return fail($('agree'), 'agree_m', '동의해 주셔야 결과지를 보내 드릴 수 있습니다');
+  const go = $('go5'); go.disabled = true; go.textContent = '보내는 중…';
+  const q = new URLSearchParams(location.search);
+  S.phone = digits(phone.value); S.ad = q.get('ad') || ''; S.set = q.get('set') || '';
+  // ponytail: 서버 연결 전 — 붙일 때 같은 PHONE_RE·parseBirth로 서버도 거절(400), OK 뒤에만 픽셀
+  e.target.classList.add('hide'); pieceEnd(); showStep(6);
+});
+
+/* 자체 시험 */
+console.assert(!PHONE_RE.test('0101234567') && PHONE_RE.test('01012345678'), 'phone');
+console.assert(parseBirth('1987031') === null && parseBirth('19870230') === null && parseBirth('1998') === null, 'birth-reject');
+console.assert(parseTime('2460') === null && parseTime('730').mi === 30, 'time');
+console.assert(jo('보석','와','과') === '보석과' && jo('바다','와','과') === '바다와', 'josa');
+console.assert(eightChar(1987, 3, 14, 7, 30).join(' ') === '丁卯 癸卯 壬戌 癸卯', 'calc 1987 서머타임');
+</script>
+</body></html>
